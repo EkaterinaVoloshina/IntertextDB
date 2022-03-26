@@ -12,7 +12,7 @@ def app():
     
     st.title('Наша команда')
     
-    col1, col2, col3 = st.columns([5, 5])
+    col1, col2, col3 = st.columns([5, 5, 5])
     with col1:
         st.text('Анна Аксенова')
     with col2:
