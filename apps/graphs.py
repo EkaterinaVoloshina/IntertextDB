@@ -3,7 +3,7 @@ import pyvis  as pv
 
 def app():
     st.title('The visualisation of intertextual connections')
-    col1, col2 = st.columns([5, 5, 5])
+    col1, col2 = st.columns([5, 5])
     with col1:
         options = []
         author = st.multiselect(
