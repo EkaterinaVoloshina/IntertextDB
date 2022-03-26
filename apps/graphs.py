@@ -14,7 +14,7 @@ def app():
         connections = st.text_input(
             label='Number of connections:',
         )
-    col1, col2 = st.columns([5, 5])
+    col1, col2 = st.columns([5, 5, 5])
     with col1:
         options = []
         ref = st.multiselect(
