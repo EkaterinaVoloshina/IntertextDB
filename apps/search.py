@@ -16,6 +16,11 @@ from search_utils import main_search
 # sort_direction=1,
 # skip=0
 
+def init_connection():
+    return pymongo.MongoClient(**st.secrets["mongo"])
+
+client = init_connection()
+db = client.intertext
 
 def app():
 
