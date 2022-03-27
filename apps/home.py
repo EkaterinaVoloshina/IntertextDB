@@ -16,6 +16,7 @@ def app():
     with col1:
         st.text('Анна Аксенова')
     with col2:
+        st.image('img/me.png')
         st.text('Екатерина Волошина')
     with col3:
         st.image('img/polina.png')
