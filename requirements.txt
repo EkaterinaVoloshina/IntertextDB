@@ -1,3 +1,4 @@
 pandas
 streamlit_authenticator
 pyvis
+pymongo
