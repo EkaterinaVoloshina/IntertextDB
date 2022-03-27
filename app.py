@@ -9,11 +9,12 @@ def init_connection():
 
 client = init_connection()
 app = MultiApp()
+db = client.intertext
 
-app.add_app("Home", home.app)
-app.add_app("Log in", users.app)
-app.add_app("Search", search.app)
-app.add_app("Information", poets.app)
-app.add_app("Visualisation", graphs.app)
+app.add_app("Главная", home.app)
+app.add_app("Вход", users.app)
+app.add_app("Поиск", search.app)
+app.add_app("Информация", poets.app)
+app.add_app("Визуализация", graphs.app)
 # The main app
 app.run()
