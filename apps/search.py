@@ -176,7 +176,7 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
                         "year_born": "$year_born",
                         "year_dead": "$year_dead",
                     },
-                    "author_born"
+                    "author_born",
                     "num_refs": "$num_refs",
                     "poem": {
                         "poem_name": "$poems.poem_name",
@@ -300,8 +300,10 @@ def app():
             lemmas=lemmas, sort_year=sort_year, sort_direction=sort_direction,
             skip=0
         )
-
+        
         st.code(results)
+        for result in results:
+            st.text(result['author']
 
 if __name__ == "__main__":
     main()
