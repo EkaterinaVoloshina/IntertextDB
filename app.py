@@ -7,9 +7,9 @@ from apps import home, search, poets, users, graphs # import your app modules he
 def init_connection():
     return pymongo.MongoClient(**st.secrets["mongo"])
 
-client = init_connection()
+#client = init_connection()
 app = MultiApp()
-db = client.intertext
+#db = client.intertext
 
 app.add_app("Главная", home.app)
 app.add_app("Вход", users.app)
