@@ -23,5 +23,5 @@ def app():
         )
     with col2:
         ref_connections = st.text_input(
-            label='Number of connections:'
+            label='Number of connections:',
         )
