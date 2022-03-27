@@ -21,7 +21,7 @@ def app():
     with col3:
         st.image('img/polina.png')
         st.text('Полина Кудрявцева')
-    col1, col2 = st.columns([5, 5])
+    col1, col2 = st.columns([3, 3])
     with col1:
         st.image('img/katya.png')
         st.text('Екатерина Такташева')
