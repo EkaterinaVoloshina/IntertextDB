@@ -303,5 +303,5 @@ def app():
         
         st.code(results)
         for result in results:
-            st.text(result['author'])
+            st.text(result)
 
