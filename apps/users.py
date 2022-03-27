@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 
-names = ['Katya Taktasheva','Katya Voloshina']
+names = ['Катя Такташева','Катя Волошина']
 usernames = ['tak_ty','vokat']
 passwords = ['123','456']
 hashed_passwords = stauth.Hasher(passwords).generate()
@@ -11,7 +11,7 @@ authenticator = stauth.Authenticate(names,usernames,hashed_passwords,
 def app():
     name, authentication_status, username = authenticator.login('Login', 'main')
     if authentication_status:
-        st.write('Welcome, *%s*' % (name))
+        st.write('Добро пожаловать, *%s*' % (name))
         st.header('На этой стране можно редактировать базу данных')
         st.selectbox('Что вы хотите сделать?', ['удалить таблицу', 'добавить таблицу', 'редактировать'])
     elif authentication_status == False:
