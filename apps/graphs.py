@@ -11,7 +11,7 @@ def app():
     col1, col2 = st.columns([5, 5])
     with col1:
         options = ['greater', 'equal', 'less']
-        ref = st.multiselect(
+        ref = st.multibox(
             label='Mode',
             options=sorted(options)
         )
