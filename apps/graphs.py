@@ -19,3 +19,4 @@ def app():
         ref_connections = st.text_input(
             label='Number of references:',
         )
+    button = st.button('Show graph')
