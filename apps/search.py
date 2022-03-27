@@ -192,7 +192,7 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
     return res
 
 def init_connection():
-    return pymongo.MongoClient(**st.secrets["mongo"])
+    return pymongo.MongoClient(st.secrets["mongo"]["key"])
 
 def app():
     
