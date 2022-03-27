@@ -216,6 +216,7 @@ def app():
     poem_name = st.text_input(
         label='Название произведения:'
     )
+    
     persons_ref = st.multiselect(
         label='Отсылка на:',
         options=db.references.find().distinct("person")
