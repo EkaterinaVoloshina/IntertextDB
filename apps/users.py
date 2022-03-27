@@ -12,7 +12,8 @@ def app():
     name, authentication_status, username = authenticator.login('Login', 'main')
     if authentication_status:
         st.write('Welcome, *%s*' % (name))
-        st.header('Here you can delete, change data or add new poets.')
+        st.header('На этой стране можно редактировать базу данных').
+        st.selectbox('Что вы хотите сделать?', ['удалить таблицу', 'добавить таблицу', 'редактировать'])
     elif authentication_status == False:
         st.error('Username/password is incorrect')
     elif authentication_status == None:
