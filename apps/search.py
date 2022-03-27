@@ -305,5 +305,3 @@ def app():
         for result in results:
             st.text(result['author']
 
-if __name__ == "__main__":
-    main()
