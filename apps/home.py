@@ -22,7 +22,7 @@ def app():
         st.text('Полина Кудрявцева')
     col1, col2 = st.columns([5, 5])
     with col1:
-        t.image('img/katya.png')
+        st.image('img/katya.png')
         st.text('Екатерина Такташева')
     with col2:
         st.text('Екатерина Тарасова')
