@@ -18,6 +18,7 @@ def app():
     with col2:
         st.text('Екатерина Волошина')
     with col3:
+        st.image('img/2S3DRqdud4s.jpg')
         st.text('Полина Кудрявцева')
     col1, col2 = st.columns([5, 5])
     with col1:
