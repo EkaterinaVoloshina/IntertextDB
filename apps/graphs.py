@@ -2,7 +2,7 @@ import streamlit as st
 import pyvis  as pv
 
 def app():
-    st.title('The visualisation of intertextual connections')
+    st.header('The visualisation of intertextual connections')
     options = []
     author = st.multiselect(
             label='Author',
