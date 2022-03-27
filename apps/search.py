@@ -303,7 +303,7 @@ def app():
         
         st.code(results)
         for result in results:
-            st.markdown('✍ *' + result['poem']['poem_name'] + '*')
+            st.markdown('✍ **' + result['poem']['poem_name'] + '**')
             with st.expander('Посмотреть текст'):
-                st.write(result['poem']['text'])
+                st.text(result['poem']['text'])
 
