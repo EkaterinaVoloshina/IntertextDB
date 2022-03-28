@@ -274,7 +274,7 @@ def app():
     if button:
         st.markdown("---")
         st.subheader('Результаты поиска')
-
+        st.info('Начинаем поиск, это может занять некоторое время...')
         results = main_search(
             db=db, authors=authors, year_min_a=year_min_a, year_max_a=year_max_a,
             poem_name=poem_name, persons_ref=persons_ref, book_name=book_name,
