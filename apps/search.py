@@ -274,7 +274,6 @@ def app():
     if button:
         st.markdown("---")
         st.subheader('Результаты поиска')
-        st.info('Начинаем поиск, это может занять некоторое время...')
         results = main_search(
             db=db, authors=authors, year_min_a=year_min_a, year_max_a=year_max_a,
             poem_name=poem_name, persons_ref=persons_ref, book_name=book_name,
@@ -283,19 +282,18 @@ def app():
             lemmas=lemmas, sort_year=sort_year, sort_direction=sort_direction,
             skip=0
         )
-        if results:
-            for result in results:
-                st.markdown('🖋 **' + str(result['poem']['poem_name']) + '** (' + result['book']['book_name'] + ', ' + result['book']['publishing_company'] + ', ' + str(int(result['book']['year_published'])) +')')
-                st.markdown('👤' + result['author']['name'] + ', ' + str(int(result['author']['year_born'])) + '-' + str(int(result['author']['year_dead'])))
-                comment = result['comment']['text']
-                for num, ref in enumerate(result['references']):
-                    start = ref['start'] + num * 6
-                    finish = ref['finish'] + num * 6
-                    comment = comment[:start] + '___' + comment[start:finish] + '___' + comment[finish:]
-                st.markdown(comment + ' [' + result['comment']['author'] + ']')
-                with st.expander('Посмотреть текст стихотворения'):
-                    st.text(result['poem']['text'])
-        else:
-            st.info('Ничего не нашлось :(')
-        
+        for result in results:
+            if result is None:
+                 st.info('Ничего не нашлось :(')
+                 break
+            st.markdown('🖋 **' + str(result['poem']['poem_name']) + '** (' + result['book']['book_name'] + ', ' + result['book']['publishing_company'] + ', ' + str(int(result['book']['year_published'])) +')')
+            st.markdown('👤' + result['author']['name'] + ', ' + str(int(result['author']['year_born'])) + '-' + str(int(result['author']['year_dead'])))
+            comment = result['comment']['text']
+            for num, ref in enumerate(result['references']):
+                start = ref['start'] + num * 6
+                finish = ref['finish'] + num * 6
+                comment = comment[:start] + '___' + comment[start:finish] + '___' + comment[finish:]
+            st.markdown(comment + ' [' + result['comment']['author'] + ']')
+            with st.expander('Посмотреть текст стихотворения'):
+                st.text(result['poem']['text'])
 
