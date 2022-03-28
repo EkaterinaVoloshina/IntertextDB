@@ -11,7 +11,12 @@ def init_connection():
 def app():
     client = init_connection()
     db = client.intertext
-    st.markdown('📊 Визуализация интертекстуальных связей')
+      col1, col2 = st.columns([1, 8])
+    with col2:
+        st.header('Визуализация интертекстуальных связей')
+    with col1:
+        st.markdown("<h1 style='text-align: center; font-size: 300%'>📊</h1>",
+                    unsafe_allow_html=True)
     options = db.authors.find().distinct("name")
     name = st.selectbox(
         label='Author',
