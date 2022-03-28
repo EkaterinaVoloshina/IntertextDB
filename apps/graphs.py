@@ -21,7 +21,7 @@ def app():
     with col1:
         options = {'$gt': 'greater',
                    '$eq': 'equal',
-                   '$ls': 'less'}
+                   '$lt': 'less'}
         sort = st.selectbox(
             label='Mode',
             options=list(options.keys()),
