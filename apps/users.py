@@ -18,7 +18,6 @@ def app():
         with col1:
             st.markdown("<h1 style='text-align: center; font-size: 300%'>💻</h1>",
                         unsafe_allow_html=True)
-        st.header('На этой стране можно редактировать базу данных')
         
         st.selectbox('Что вы хотите сделать?', ['удалить таблицу', 'добавить таблицу', 'редактировать'])
     elif authentication_status == False:
