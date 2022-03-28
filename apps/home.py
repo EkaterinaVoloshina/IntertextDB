@@ -20,6 +20,7 @@ def app():
         st.text('Анна Аксенова')
     col1, col2, col3, col4, col5 = st.columns([5, 5, 5, 5, 5])
     with col2:
-        st.text('Анна Аксенова')
+        st.image('img/katya.png')
+        st.text('Екатерина Такташева')
     with col4:
         st.text('Анна Аксенова')    
