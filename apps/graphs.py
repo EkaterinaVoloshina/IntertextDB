@@ -78,4 +78,4 @@ def app():
 
 
         g.show('example.html')
-        components.html(open('example.html', 'r', encoding='utf-8').read(), height=1200, width=1000)
+        components.html(open('example.html', 'r', encoding='utf-8').read(), height=1500, width=1500)
