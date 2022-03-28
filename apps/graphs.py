@@ -71,7 +71,7 @@ def app():
         ])
         g = net.Network(height='400px', width='50%', heading='')
         g.add_node(name)
-        my_bar = st.progress(0)
+        my_bar = st.progress(len(res))
         for num, ref in enumerate(res):
             ref_name = ref['_id']
             g.add_node(ref_name)
