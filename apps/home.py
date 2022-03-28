@@ -11,4 +11,15 @@ def app():
     st.text('увлеченным литературой учащимся наш ресурс поможет открыть много нового.')
     
     st.header('НАША КОМАНДА')
-    st.text('ЕЕ НЕТ, ПОТОМУ ЧТО Я НЕ МОГУ СПРАВИТЬСЯ СО СТРИМЛИТОМ')
+    col1, col2, col3 = st.columns([5, 5, 5])
+    with col1:
+        st.text('Анна Аксенова')
+    with col2:
+        st.text('Анна Аксенова')
+    with col3:
+        st.text('Анна Аксенова')
+    col1, col2 = st.columns([5, 5])
+    with col1:
+        st.text('Анна Аксенова')
+    with col2:
+        st.text('Анна Аксенова')    
