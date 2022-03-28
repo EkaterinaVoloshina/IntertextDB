@@ -310,6 +310,6 @@ def app():
                 finish = ref['finish'] + num * 6
                 comment = comment[:start] + '___' + comment[start:finish] + '___' + comment[finish:]
             st.markdown(comment + ' [' + result['comment']['author'] + ']')
-            with st.expander('Посмотреть текст'):
+            with st.expander('Посмотреть текст стихотворения'):
                 st.text(result['poem']['text'])
 
