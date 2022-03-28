@@ -30,43 +30,28 @@ def app():
 
         todo = st.selectbox('Что вы хотите сделать?', ['удалить', 'добавить', 'редактировать'])
 
-
         if todo == 'удалить':
-            func_dict = {
-                'поэта': (
-                    'Выберите поэта', db.authors.find().distinct("name")
-                ),
-                'сборник': (
-                    'Выберите сборник', db.books.find().distinct("book_name")
-                ),
-                'поэму': (
-                    'Выберите поэму', db.poems.find().distinct("poem_name")
-                ),
-                'отсылку': (
-                    'Выберите отсылки на какого поэта вы хотите отредактировать',
-                    db.references.find().distinct("person")
-                ),
-            }
             st.subheader('Удалить')
             st.text('Здесь вы можете удалить нужные вам значени из базы')
 
             todelete = st.selectbox('Что вы хотите удалить?', ['поэта', 'сборник', 'поэму', 'отсылку'])
-            label, options = func_dict[todelete]
 
             if todelete == 'поэта':
-                author = st.selectbox(label, options)
+                author = st.selectbox('Выберите поэта', db.authors.find().distinct("name"))
                 button = st.button('Удалить', key='1')
                 if button:
                     author_id = db.authors.find_one({'name': author})
-                    books = author_id['books']
-                    poems = author_id['poems']
+                    if 'books' in author_id:
+                        books = author_id['books']
+                        db.books.delete_many({"_id": {"$in": books}})
+                    if 'poems' in author_id:
+                        poems = author_id['poems']
+                        db.references.delete_many({'poem': {"$in": poems}})
+                        db.poems.delete_many({"_id": {"$in": poems}})
                     db.authors.delete_one({"_id": author_id['_id']})
-                    db.poems.delete_many({"_id": {"$in": poems}})
-                    db.books.delete_many({"_id": {"$in": books}})
-                    db.references.delete_many({'poem': {"$in": poems}})
                     st.info(f'Автор {author} удален')
             elif todelete == 'сборник':
-                book_name = st.selectbox(label, options)
+                book_name = st.selectbox(Выберите сборник', db.books.find().distinct("book_name"))
                 button = st.button('Удалить', key='1')
                 if button:
                     book_id = db.books.find_one({'book_name': book_name})
@@ -79,7 +64,7 @@ def app():
                     db.references.delete_many({'book': book_id['_id']})
                     st.info(f'Сборник {book_name} удален')
             elif todelete == 'поэму':
-                poem_name = st.selectbox(label, options)
+                poem_name = st.selectbox('Выберите поэму', db.poems.find().distinct("poem_name"))
                 button = st.button('Удалить', key='1')
                 if button:
                     poem_id = db.poems.find_one({'poem_name': poem_name})
@@ -87,7 +72,8 @@ def app():
                     db.references.delete_many({'poem': poem_id['_id']})
                     st.info(f'Поэма {poem_name} удалена')
             elif todelete == 'отсылку':
-                reference = st.selectbox(label, options)
+                reference = st.selectbox('Выберите отсылки на какого поэта вы хотите отредактировать',
+                    db.references.find().distinct("person"))
                 button = st.button('Удалить', key='1')
                 if button:
                     db.references.delete_many({'person': reference})
@@ -224,31 +210,15 @@ def app():
                             st.info(f'Отсылка добавлена в базу! Её сгенерированный id: {id}')
 
         elif todo == 'редактировать':
-            func_dict = {
-                'поэта': (
-                    'Выберите поэта', db.authors.find().distinct("name")
-                ),
-                'сборник': (
-                    'Выберите сборник', db.books.find().distinct("book_name")
-                ),
-                'поэму': (
-                    'Выберите поэму', db.poems.find().distinct("poem_name")
-                ),
-                'отсылку': (
-                    'Выберите отсылки на какого поэта вы хотите отредактировать',
-                    db.references.find().distinct("person")
-                ),
-            }
             st.subheader('Редактировать')
             st.text('Здесь вы можете редактировать записанные в базу документы.')
             st.text('Если вы не хотите менять атрибут, оставьте поле пустым.')
 
             tochange = st.selectbox('Что вы хотите изменить?',
                                  ['поэта', 'cборник', 'поэму'])
-            label, options = func_dict[tochange]
 
             if tochange == 'поэта':
-                author = st.selectbox(label, options)
+                author = st.selectbox('Выберите поэта', db.authors.find().distinct("name"))
                 st.markdown('---')
                 new_name = st.text_input('Введите новое имя:')
                 col1, col2 = st.columns([5, 5])
@@ -273,7 +243,7 @@ def app():
                         st.info("Нечего менять")
 
             elif tochange == 'сборник':
-                book_name = st.selectbox(label, options)
+                book_name = st.selectbox('Выберите сборник', db.books.find().distinct("book_name"))
                 st.markdown('---')
                 new_name = st.text_input('Введите новое название:')
                 col1, col2 = st.columns([5, 5])
@@ -297,19 +267,19 @@ def app():
                         st.info("Нечего менять")
 
             elif tochange == 'поэму':
-                poem_name = st.selectbox(label, options)
+                poem_name = st.selectbox('Выберите поэму', db.poems.find().distinct("poem_name"))
                 st.markdown('---')
                 poem = db.poems.find_one({"poem_name": poem_name})
                 author_id = poem['author']
                 author_id = db.authors.find_one({"_id": author_id})
-                authors = func_dict['поэта'][1]
+                authors = db.authors.find().distinct("name")
                 author = st.selectbox('Имя автора:', authors, authors.index(author_id['name']))
                 col1, col2 = st.columns([5, 5])
                 with col1:
                     new_poem_name = st.text_input('Название поэмы:')
                 with col2:
                     poem_name_2 = st.text_input('Альтернативное название:')
-                books = func_dict['cборник'][1]
+                books = db.books.find().distinct("book_name")
                 book_id = poem['book']
                 book_id = db.books.find_one({"_id": book_id})
                 book_name = st.selectbox('Название сборника:', books,
