@@ -267,7 +267,8 @@ def app():
             options=list(sort_dirs.keys()),
             format_func=lambda x: sort_dirs[x]
         )
-
+    with st.expander('Инструкция'):
+        st.text('Инструкция')
     button = st.button('Search', key='1')
 
     # search results
