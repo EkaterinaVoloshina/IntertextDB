@@ -16,7 +16,7 @@ def app():
         st.text('Анна Аксенова')
     with col3:
         st.image('img/me.png')
-        st.html('<p style="text-align: center;">Екатерина Волошина</p>', unsafe_allow_html=True)
+        st.markdown('<p style="text-align: center;">Екатерина Волошина</p>', unsafe_allow_html=True)
     with col5:
         st.image('img/polina.png')
         st.text('Полина')
