@@ -306,10 +306,11 @@ def app():
             st.markdown('🖋 **' + str(result['poem']['poem_name']) + '** (' + result['book']['book_name'] + ', ' + result['book']['publishing_company'] + ', ' + str(int(result['book']['year_published'])) +')')
             st.markdown('👤' + result['author']['name'] + ', ' + str(int(result['author']['year_born'])) + '-' + str(int(result['author']['year_dead'])))
             comment = result['comment']['text']
-            start = result['references'][0]['start']
-            finish = result['references'][0]['finish']
-            st.markdown(comment[:start] + '**' + comment[start:finish] + '**' + comment[finish:])
-            #st.markdown(comment)
+            for ref in references:
+                start = result['references'][0]['start']
+                finish = result['references'][0]['finish']
+                comment = comment[:start] + '***' + comment[start:finish] + '***' + comment[finish:]
+            st.markdown(comment)
             with st.expander('Посмотреть текст'):
                 st.text(result['poem']['text'])
 
