@@ -16,8 +16,7 @@ def app():
         st.text('Анна Аксенова')
     with col3:
         st.image('img/me.png')
-        st.text('Екатерина')
-        st.text('Волошина')
+        st.markdown('Екатерина <br> Волошина')
     with col5:
         st.image('img/polina.png')
         st.text('Полина')
