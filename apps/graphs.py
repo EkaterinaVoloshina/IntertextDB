@@ -29,7 +29,7 @@ def app():
         )
     with col2:
         freq = st.number_input(
-            label='Number of references:',
+            label='Number of references:', step=1,
         )
     button = st.button('Show graph')
     if button:
