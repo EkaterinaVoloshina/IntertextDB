@@ -11,15 +11,15 @@ def app():
     st.text('увлеченным литературой учащимся наш ресурс поможет открыть много нового.')
     
     st.header('НАША КОМАНДА')
-    col1, col2, col3 = st.columns([5, 5, 5])
+    col1, col2, col3, col4, col5 = st.columns([5, 5, 5, 5, 5])
     with col1:
-        st.text('Анна Аксенова')
-    with col2:
         st.text('Анна Аксенова')
     with col3:
         st.text('Анна Аксенова')
-    col1, col2 = st.columns([5, 5])
-    with col1:
+    with col5:
         st.text('Анна Аксенова')
+    col1, col2, col3, col4, col5 = st.columns([5, 5, 5, 5, 5])
     with col2:
+        st.text('Анна Аксенова')
+    with col4:
         st.text('Анна Аксенова')    
