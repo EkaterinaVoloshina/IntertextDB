@@ -50,7 +50,7 @@ def app():
             st.subheader('Удалить')
             st.text('Здесь вы можете удалить нужные вам значени из базы')
 
-            todelete = st.selectbox('Что вы хотите удалить?', ['поэта', 'cборник', 'поэму', 'отсылку'])
+            todelete = st.selectbox('Что вы хотите удалить?', ['поэта', 'сборник', 'поэму', 'отсылку'])
             label, options = func_dict[todelete]
 
             if todelete == 'поэта':
