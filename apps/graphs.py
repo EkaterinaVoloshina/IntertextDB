@@ -19,22 +19,22 @@ def app():
                     unsafe_allow_html=True)
     options = db.authors.find().distinct("name")
     name = st.selectbox(
-        label='Author',
+        label='Автор',
         options=sorted(options)
     )
     col1, col2 = st.columns([5, 5])
     with col1:
-        options = {'$gt': 'greater',
-                   '$eq': 'equal',
-                   '$lt': 'less'}
+        options = {'$gt': 'больше',
+                   '$eq': 'равно',
+                   '$lt': 'меньше'}
         sort = st.selectbox(
-            label='Mode',
+            label='Фильтр',
             options=list(options.keys()),
             format_func = lambda x: options[x]
         )
     with col2:
         freq = st.number_input(
-            label='Number of references:', step=1,
+            label='Количество отсылок:', step=1,
         )
     button = st.button('Show graph')
     if button:
