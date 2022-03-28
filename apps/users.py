@@ -36,7 +36,7 @@ def app():
                 'поэта': (
                     'Выберите поэта', db.authors.find().distinct("name")
                 ),
-                'cборник': (
+                'сборник': (
                     'Выберите сборник', db.books.find().distinct("book_name")
                 ),
                 'поэму': (
@@ -126,7 +126,7 @@ def app():
                                 "year_deed": int(year_dead)
                             }).inserted_id
                             st.info(f'Поэт добавлен в базу! Его сгенерированный id: {id}')
-            elif toadd == 'cборник':
+            elif toadd == 'сборник':
                 book_name = st.text_input(label='*Введите название сборника:')
                 col1, col2 = st.columns([5, 5])
                 with col1:
@@ -228,7 +228,7 @@ def app():
                 'поэта': (
                     'Выберите поэта', db.authors.find().distinct("name")
                 ),
-                'cборник': (
+                'сборник': (
                     'Выберите сборник', db.books.find().distinct("book_name")
                 ),
                 'поэму': (
@@ -272,7 +272,7 @@ def app():
                     else:
                         st.info("Нечего менять")
 
-            elif tochange == 'cборник':
+            elif tochange == 'сборник':
                 book_name = st.selectbox(label, options)
                 st.markdown('---')
                 new_name = st.text_input('Введите новое название:')
