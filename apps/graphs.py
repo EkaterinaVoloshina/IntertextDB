@@ -11,7 +11,7 @@ def init_connection():
 def app():
     client = init_connection()
     db = client.intertext
-    st.title('Визуализация интертекстуальных связей')
+    st.markdown('📊 Визуализация интертекстуальных связей')
     options = db.authors.find().distinct("name")
     name = st.selectbox(
         label='Author',
