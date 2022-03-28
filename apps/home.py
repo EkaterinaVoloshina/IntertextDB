@@ -17,10 +17,12 @@ def app():
     with col3:
         st.text('Анна Аксенова')
     with col5:
-        st.text('Анна Аксенова')
+        st.image('img/polina.img')
+        st.text('Полина Кудрявцева')
     col1, col2, col3, col4, col5 = st.columns([5, 5, 5, 5, 5])
     with col2:
         st.image('img/katya.png')
-        st.text('Екатерина Такташева')
+        st.text('Екатерина')
+        st.text('Такташева')
     with col4:
         st.text('Анна Аксенова')    
