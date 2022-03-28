@@ -71,12 +71,11 @@ def app():
         ])
         g = net.Network(height='400px', width='50%', heading='')
         g.add_node(name)
-        my_bar = st.progress(len(res))
         for num, ref in enumerate(res):
             ref_name = ref['_id']
             g.add_node(ref_name)
             g.add_edge(name, ref_name)
-            my_bar.progress(num + 1)
+
 
         g.show('example.html')
         components.html(open('example.html', 'r', encoding='utf-8').read(), height=1200, width=1000)
