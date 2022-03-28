@@ -13,7 +13,8 @@ def app():
     st.header('НАША КОМАНДА')
     col1, col2, col3, col4, col5 = st.columns([5, 5, 5, 5, 5])
     with col1:
-        st.markdown('<p style="text-align: center;">Анна Аксенова</p>', unsafe_allow_html=True)
+        st.image('img/anya.png')
+        st.markdown('<p style="text-align: center;">Анна <br> Аксенова</p>', unsafe_allow_html=True)
     with col3:
         st.image('img/me.png')
         st.markdown('<p style="text-align: center;">Екатерина Волошина</p>', unsafe_allow_html=True)
@@ -25,4 +26,5 @@ def app():
         st.image('img/katya.png')
         st.markdown('<p style="text-align: center;">Екатерина Такташева</p>', unsafe_allow_html=True)
     with col4:
+        st.image('img/katya_t.png')
         st.markdown('<p style="text-align: center;">Екатерина Тарасова</p>', unsafe_allow_html=True)
