@@ -37,6 +37,8 @@ def app():
             label='Количество отсылок:', step=1,
         )
     button = st.button('Show graph')
+    with st.expander('Инструкция'):
+        st.text('Инструкция')
     if button:
         res = db.authors.aggregate([
             {'$match': {'name': name}},
