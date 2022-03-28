@@ -51,7 +51,7 @@ def app():
                     db.authors.delete_one({"_id": author_id['_id']})
                     st.info(f'Автор {author} удален')
             elif todelete == 'сборник':
-                book_name = st.selectbox(Выберите сборник', db.books.find().distinct("book_name"))
+                book_name = st.selectbox('Выберите сборник', db.books.find().distinct("book_name"))
                 button = st.button('Удалить', key='1')
                 if button:
                     book_id = db.books.find_one({'book_name': book_name})
