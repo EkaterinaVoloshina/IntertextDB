@@ -1,22 +1,5 @@
 import streamlit as st
 import pymongo
-#from search_utils import main_search
-
-# # authors=None,
-# # year_min_a=None
-# # year_max_a=None
-# # poem_name=None,
-# persons_ref=None,
-# # book_name=None,
-# # year_min_pub=None,
-# # year_max_pub=None,
-# # publishing_company=None,
-# # lemmas=None,
-# sort_year='year_born',
-# sort_direction=1,
-# skip=0
-
-import pymongo
 from bson import ObjectId
 
 
@@ -300,16 +283,19 @@ def app():
             lemmas=lemmas, sort_year=sort_year, sort_direction=sort_direction,
             skip=0
         )
+        if results:
+            for result in results:
+                st.markdown('🖋 **' + str(result['poem']['poem_name']) + '** (' + result['book']['book_name'] + ', ' + result['book']['publishing_company'] + ', ' + str(int(result['book']['year_published'])) +')')
+                st.markdown('👤' + result['author']['name'] + ', ' + str(int(result['author']['year_born'])) + '-' + str(int(result['author']['year_dead'])))
+                comment = result['comment']['text']
+                for num, ref in enumerate(result['references']):
+                    start = ref['start'] + num * 6
+                    finish = ref['finish'] + num * 6
+                    comment = comment[:start] + '___' + comment[start:finish] + '___' + comment[finish:]
+                st.markdown(comment + ' [' + result['comment']['author'] + ']')
+                with st.expander('Посмотреть текст стихотворения'):
+                    st.text(result['poem']['text'])
+        else:
+            st.info('Ничего не нашлось :(')
         
-        for result in results:
-            st.markdown('🖋 **' + str(result['poem']['poem_name']) + '** (' + result['book']['book_name'] + ', ' + result['book']['publishing_company'] + ', ' + str(int(result['book']['year_published'])) +')')
-            st.markdown('👤' + result['author']['name'] + ', ' + str(int(result['author']['year_born'])) + '-' + str(int(result['author']['year_dead'])))
-            comment = result['comment']['text']
-            for num, ref in enumerate(result['references']):
-                start = ref['start'] + num * 6
-                finish = ref['finish'] + num * 6
-                comment = comment[:start] + '___' + comment[start:finish] + '___' + comment[finish:]
-            st.markdown(comment + ' [' + result['comment']['author'] + ']')
-            with st.expander('Посмотреть текст стихотворения'):
-                st.text(result['poem']['text'])
 
