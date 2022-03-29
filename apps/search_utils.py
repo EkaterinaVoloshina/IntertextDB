@@ -175,7 +175,7 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
 
 
 
-def fulltext_search(db, text, sort_year, sort_direction):
+def fulltext_search(db, text, sort_year, sort_direction, skip):
     results = db.poems.aggregate([
                 {'$match':{'$text':{'$search':text}}},
                 {
