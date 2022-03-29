@@ -242,7 +242,7 @@ def app():
                     comment = comment[:start] + '<i>' + comment[
                                                             start:finish] + '</i>' + comment[
                                                                                     finish:]
-                paragraph, _ = comment.split('\n', maxsplit=1)
+                paragraph, _ = comment.split('\r\n', maxsplit=1)
                 st.markdown(paragraph + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
                 with st.expander('Посмотреть полный текст комментария'):
                     st.markdown(comment + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
