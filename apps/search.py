@@ -243,9 +243,9 @@ def app():
                                                             start:finish] + '</i>' + comment[
                                                                                     finish:]
                 paragraph, _ = comment.split('\n', maxsplit=1)
-                st.markdown(paragraph + ' [' + result['comment']['author'] + ']', allow_unsafe_html=True)
+                st.markdown(paragraph + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
                 with st.expander('Посмотреть полный текст комментария'):
-                    st.markdown(comment + ' [' + result['comment']['author'] + ']', allow_unsafe_html=True)
+                    st.markdown(comment + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
                 with st.expander('Посмотреть текст стихотворения'):
                     st.text(result['poem']['text'])
         col1, col2, col3 = st.columns([2, 4, 0.5])
