@@ -172,3 +172,75 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
             },
         ])
     return res
+
+
+
+def fulltext_search(search, sort_year, sort_direction):
+    results = db.poems.aggregate([
+                {'$match':{'$text':{'$search':search}}},
+                {
+                    "$lookup": {
+                        "from": "authors",
+                        "localField": "author",
+                        "foreignField": "_id",
+                        "as": "authors"
+                    }},
+                {
+                    "$unwind":"$authors"
+                },
+                {
+                    "$lookup": {
+                        "from": "references",
+                        "localField": "_id",
+                        "foreignField": "poem",
+                        "as": "references"
+                    }
+                },
+                {
+                    "$addFields": {
+                        "book_id": "$book",
+                        "poem_id": "$_id",
+                        "num_refs": {"$size":"$references"}
+                    }
+                },
+                {
+                    "$lookup": {
+                        "from": "books",
+                        "localField": "book_id",
+                        "foreignField": "_id",
+                        "as": "books"
+                    }
+                },
+                {
+                    "$unwind": "$books"
+                },
+                {
+                    "$sort": sorting(year=sort_year, direction=sort_direction)
+                },
+                {
+                    "$limit": 5
+                },
+                {
+                  "$skip": skip
+                },
+                {
+                    "$project": {
+                        "author": {
+                            "name": "$authors.name",
+                            "year_born": "$authors.year_born",
+                            "year_dead": "$authors.year_dead",
+                        },
+                        "author_born"
+                        "num_refs": "$num_refs",
+                        "poem": {
+                            "poem_name": "$poem_name",
+                            "poem_name_2": "$poem_name_2",
+                            "text": "$text"
+                        },
+                        "book": "$books",
+                        "comment": "$comment",
+                        "references": "$references"
+                    }
+                },
+            ])
+    return results
