@@ -19,8 +19,8 @@ def search_author(authors=None, year_min=None, year_max=None):
 
 def search_poem(poem_name=None):
     query = {}
-    if poem_name is not None and poem_name != '':
-        query.update({"poem_name": poem_name})
+    if poem_name is not None and len(poem_name) != 0:
+        query.update({"poem_name": {"%in": poem_name}})
     query = query if len(query) != 0 else {"poem_name": {"$exists": "true"}}
     return {"$match": query}
 
