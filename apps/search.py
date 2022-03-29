@@ -1,6 +1,4 @@
 import streamlit as st
-import pymongo
-from bson import ObjectId
 from .search_utils import *
 
 
@@ -129,12 +127,14 @@ def app():
     if button:
         st.markdown("---")
         if fulltext:
-            with st.spinner('⏳ Ищем документы...')
-                results = fulltext_search(db=db, text=fulltext, 
-                                          sort_year=sort_year, sort_direction=sort_direction,
-                                          skip=0)
+            with st.spinner('⏳ Ищем документы...'):
+                results = fulltext_search(
+                    db=db, text=fulltext, 
+                    sort_year=sort_year, sort_direction=sort_direction,
+                    skip=0
+                )
         else:
-            with st.spinner('⏳ Ищем документы...')
+            with st.spinner('⏳ Ищем документы...'):
                 results = main_search(
                     db=db, authors=authors, year_min_a=year_min_a, year_max_a=year_max_a,
                     poem_name=poem_name, persons_ref=persons_ref, book_name=book_name,
