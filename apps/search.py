@@ -202,7 +202,7 @@ def app():
                         year_min_pub=year_min_pub, year_max_pub=year_max_pub,
                         publishing_company=publishing_company, sort_year=sort_year,
                         sort_direction=sort_direction,
-                        skip=page * 3
+                        skip=page * 5
                     )
             else:
                 with st.spinner('⏳ Ищем документы...'):
@@ -215,7 +215,7 @@ def app():
                         publishing_company=publishing_company,
                         lemmas=lemmas, sort_year=sort_year,
                         sort_direction=sort_direction,
-                        skip=page * 3
+                        skip=page * 5
                     )
             results = list(results)
             return results
