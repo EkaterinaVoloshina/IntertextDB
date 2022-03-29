@@ -195,8 +195,13 @@ def app():
             if st.session_state.fulltext:
                 with st.spinner('⏳ Ищем документы...'):
                     results = fulltext_search(
-                        db=db, text=fulltext,
-                        sort_year=sort_year, sort_direction=sort_direction,
+                        db=db, text=fulltext, authors=authors, year_min_a=year_min_a,
+                        year_max_a=year_max_a,
+                        poem_name=poem_name, persons_ref=persons_ref,
+                        book_name=book_name,
+                        year_min_pub=year_min_pub, year_max_pub=year_max_pub,
+                        publishing_company=publishing_company, sort_year=sort_year,
+                        sort_direction=sort_direction,
                         skip=page * 3
                     )
             else:
