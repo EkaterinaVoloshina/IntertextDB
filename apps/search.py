@@ -112,14 +112,19 @@ def app():
     if button:
         st.markdown("---")
         st.subheader('Результаты поиска')
-        results = main_search(
-            db=db, authors=authors, year_min_a=year_min_a, year_max_a=year_max_a,
-            poem_name=poem_name, persons_ref=persons_ref, book_name=book_name,
-            year_min_pub=year_min_pub, year_max_pub=year_max_pub,
-            publishing_company=publishing_company,
-            lemmas=lemmas, sort_year=sort_year, sort_direction=sort_direction,
-            skip=0
-        )
+        if fulltext:
+            results = fulltext_search(db=db, text=fulltext, 
+                                      sort_year=sort_year, sort_direction=sort_direction,
+                                      skip=0)
+        else:
+            results = main_search(
+                db=db, authors=authors, year_min_a=year_min_a, year_max_a=year_max_a,
+                poem_name=poem_name, persons_ref=persons_ref, book_name=book_name,
+                year_min_pub=year_min_pub, year_max_pub=year_max_pub,
+                publishing_company=publishing_company,
+                lemmas=lemmas, sort_year=sort_year, sort_direction=sort_direction,
+                skip=0
+            )
         for result in results:
             if result is None:
                  st.info('Ничего не нашлось :(')
