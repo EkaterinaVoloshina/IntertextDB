@@ -56,11 +56,11 @@ def app():
         
         authors = st.multiselect(
             label='Автор:',
-            options=sorted(db.authors.find().distinct("name"))
+            options=sorted(db.authors.find().distinct("name"), key=lambda x:  x.split()[-1])
         )
         persons_ref = st.multiselect(
             label='Отсылка на:',
-            options=db.references.find().distinct("person")
+            options=sorted(db.references.find().distinct("person"), key=lambda x:  x.split()[-1])
         )
         
         col1, col2, col3 = st.columns([1, 2, 2])
@@ -78,14 +78,14 @@ def app():
             )
         col1, col2 = st.columns([6, 4])
         with col1:
-            book_name = st.text_input(
-                label='Название сборника:'
+            book_name = st.multiselect(
+                label='Название сборника:',
+                options=sorted(db.books.find().distinct("book_name"))
             )
         with col2:
-            options = db.books.find().distinct("publishing_company")
             publishing_company = st.multiselect(
                 label='Издательство:',
-                options=sorted(options)
+                options=sorted(db.books.find().distinct("publishing_company"))
             )
         col1, col2, col3 = st.columns([1, 2, 2])
         with col1:
