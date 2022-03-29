@@ -146,10 +146,10 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
                 "$sort": sorting(year=sort_year, direction=sort_direction)
             },
             {
-                "$limit": 5
+                "$skip": skip
             },
             {
-                "$skip": skip
+                "$limit": 5
             },
             {
                 "$project": {
@@ -227,10 +227,10 @@ def fulltext_search(db, text, poem_name, authors, year_min_a, year_max_a,
                     "$sort": sorting(year=sort_year, direction=sort_direction)
                 },
                 {
-                    "$limit": 5
+                  "$skip": skip
                 },
                 {
-                  "$skip": skip
+                    "$limit": 5
                 },
                 {
                     "$project": {
