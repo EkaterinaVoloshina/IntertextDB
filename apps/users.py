@@ -29,13 +29,13 @@ def app():
         db = client.intertext
 
         todo = st.selectbox('Что вы хотите сделать?', ['удалить', 'добавить', 'редактировать'])
-
+        
         if todo == 'удалить':
             st.subheader('Удалить')
             st.text('Здесь вы можете удалить нужные вам значени из базы')
 
             todelete = st.selectbox('Что вы хотите удалить?', ['поэта', 'сборник', 'поэму', 'отсылку'])
-
+            st.markdown('---')
             if todelete == 'поэта':
                 author = st.selectbox('Выберите поэта', db.authors.find().distinct("name"))
                 button = st.button('Удалить', key='1')
@@ -85,6 +85,7 @@ def app():
 
             toadd = st.selectbox('Что вы хотите добавить?',
                                  ['поэта', 'сборник', 'поэму', 'отсылку'])
+            st.markdown('---')
             if toadd == 'поэта':
                 author = st.text_input(label='*Введите имя:')
                 col1, col2 = st.columns([5, 5])
