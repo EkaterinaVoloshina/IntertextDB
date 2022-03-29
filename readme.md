@@ -42,7 +42,7 @@
     ```json
     book_name:
     year_published:
-    publishing_company: ?
+    publishing_company:
     ```
     
 5. Леммы
