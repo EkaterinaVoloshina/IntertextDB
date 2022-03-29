@@ -237,12 +237,12 @@ def app():
                         int(result['author']['year_dead'])))
                 comment = result['comment']['text']
                 for num, ref in enumerate(result['references']):
-                    start = ref['start'] + num * 7
-                    finish = ref['finish'] + num * 7
-                    comment = comment[:start] + '<i>' + comment[
-                                                            start:finish] + '</i>' + comment[
+                    start = ref['start'] + num * 14
+                    finish = ref['finish'] + num * 14
+                    comment = comment[:start] + '<b><i>' + comment[
+                                                            start:finish] + '</i></b>' + comment[
                                                                                     finish:]
-                paragraph, _ = comment.split('\r\n', maxsplit=1)
+                paragraph, _ = comment.split('\n', maxsplit=1)
                 st.markdown(paragraph + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
                 with st.expander('Посмотреть полный текст комментария'):
                     st.markdown(comment + ' [' + result['comment']['author'] + ']', unsafe_allow_html=True)
