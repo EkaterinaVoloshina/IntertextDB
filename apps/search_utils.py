@@ -174,15 +174,17 @@ def main_search(db, authors=None, year_min_a=None, year_max_a=None,
     return res
 
 
-
-def fulltext_search(db, text, sort_year, sort_direction, skip):
+def fulltext_search(search, sort_year, sort_direction, poem_name, authors, year_min_a, year_max_a,
+                   book_name, year_min_pub, year_max_pub, publishing_company, persons_ref, skip):
     results = db.poems.aggregate([
-                {'$match':{'$text':{'$search':text}}},
+                {'$match':{'$text':{'$search':search}}},
+                search_poem(poem_name=poem_name),
                 {
                     "$lookup": {
                         "from": "authors",
                         "localField": "author",
                         "foreignField": "_id",
+                        'pipeline': [search_author(authors=authors, year_min=year_min_a, year_max=year_max_a)],
                         "as": "authors"
                     }},
                 {
@@ -193,6 +195,7 @@ def fulltext_search(db, text, sort_year, sort_direction, skip):
                         "from": "references",
                         "localField": "_id",
                         "foreignField": "poem",
+                        'pipeline': [search_reference(persons=persons_ref)],
                         "as": "references"
                     }
                 },
@@ -208,6 +211,12 @@ def fulltext_search(db, text, sort_year, sort_direction, skip):
                         "from": "books",
                         "localField": "book_id",
                         "foreignField": "_id",
+                         "pipeline": [
+                        search_book(
+                            book_name=book_name,
+                            year_min=year_min_pub,
+                            year_max=year_max_pub,
+                            publishing_company=publishing_company)],
                         "as": "books"
                     }
                 },
