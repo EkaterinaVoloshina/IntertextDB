@@ -45,7 +45,7 @@ def app():
     client = init_connection()
     db = client.intertext
     
-   col1, col2 = st.columns([1, 8])
+    col1, col2 = st.columns([1, 8])
     with col2:
         st.header('Поиск')
     with col1:
