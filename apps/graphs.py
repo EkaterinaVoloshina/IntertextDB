@@ -75,13 +75,14 @@ def app():
                 '_id': '$_id'
             }}
         ])
-        g = net.Network(height='400px', width='50%', heading='')
-        g.add_node(name)
-        for num, ref in enumerate(res):
-            ref_name = ref['_id']
-            g.add_node(ref_name)
-            g.add_edge(name, ref_name)
+        with st.spinner('⏳ Строим граф...'):
+            g = net.Network(height='400px', width='50%', heading='')
+            g.add_node(name)
+            for num, ref in enumerate(res):
+                ref_name = ref['_id']
+                g.add_node(ref_name)
+                g.add_edge(name, ref_name)
 
 
-        g.show('example.html')
-        components.html(open('example.html', 'r', encoding='utf-8').read(), height=1500, width=1500)
+            g.show('example.html')
+            components.html(open('example.html', 'r', encoding='utf-8').read(), height=1500, width=1500)
