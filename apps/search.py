@@ -21,9 +21,9 @@ def app():
                     unsafe_allow_html=True)
     st.text('Здесь вы можете найти нужные вам отсылки')
     
-    fulltext = st.text_input('
+    fulltext = st.text_input(
         label='Полнотекстовый поиск:',
-         placeholder='стихотворение Пушкина'
+        placeholder='стихотворение Пушкина'
     )
 
     if not fulltext:
