@@ -44,45 +44,46 @@ def app():
     
     button = st.button('Show graph')
     if button:
-        res = db.authors.aggregate([
-            {'$match': {'name': name}},
-            {'$lookup': {
-                'from': 'poems',
-                'localField': '_id',
-                'foreignField': 'author',
-                'as': 'poems'
-            }},
-            {'$lookup': {
-                'from': 'references',
-                'localField': 'poems._id',
-                'foreignField': 'poem',
-                'as': 'references'
-            }},
-            {'$unwind': '$references'},
-            {'$project': {
-                '_id': 1,
-                'author': '$name',
-                'ref.id': '$references.person',
-            }},
-            {'$group':
-                {
-                    '_id': '$ref.id',
-                    'count': {'$sum': 1}
-                }},
-            {'$match': {'count': {sort: freq}}
-             },
-            {'$project': {
-                '_id': '$_id'
-            }}
-        ])
         with st.spinner('⏳ Строим граф...'):
-            g = net.Network(height='400px', width='50%', heading='')
-            g.add_node(name)
-            for num, ref in enumerate(res):
-                ref_name = ref['_id']
-                g.add_node(ref_name)
-                g.add_edge(name, ref_name)
+            res = db.authors.aggregate([
+                {'$match': {'name': name}},
+                {'$lookup': {
+                    'from': 'poems',
+                    'localField': '_id',
+                    'foreignField': 'author',
+                    'as': 'poems'
+                }},
+                {'$lookup': {
+                    'from': 'references',
+                    'localField': 'poems._id',
+                    'foreignField': 'poem',
+                    'as': 'references'
+                }},
+                {'$unwind': '$references'},
+                {'$project': {
+                    '_id': 1,
+                    'author': '$name',
+                    'ref.id': '$references.person',
+                }},
+                {'$group':
+                    {
+                        '_id': '$ref.id',
+                        'count': {'$sum': 1}
+                    }},
+                {'$match': {'count': {sort: freq}}
+                 },
+                {'$project': {
+                    '_id': '$_id'
+                }}
+            ])
+
+        g = net.Network(height='400px', width='50%', heading='')
+        g.add_node(name)
+        for num, ref in enumerate(res):
+            ref_name = ref['_id']
+            g.add_node(ref_name)
+            g.add_edge(name, ref_name)
 
 
-            g.show('example.html')
-            components.html(open('example.html', 'r', encoding='utf-8').read(), height=1500, width=1500)
+        g.show('example.html')
+        components.html(open('example.html', 'r', encoding='utf-8').read(), height=1500, width=1500)
