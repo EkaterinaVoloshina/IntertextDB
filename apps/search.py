@@ -235,18 +235,19 @@ def app():
                 st.markdown('👤' + result['author']['name'] + ', ' + str(
                         int(result['author']['year_born'])) + '-' + str(
                         int(result['author']['year_dead'])))
-                with st.expander('Посмотреть полный текст комментария'):
-                    comment = result['comment']['text']
-                    for num, ref in enumerate(result['references']):
-                        start = ref['start'] + num * 6
-                        finish = ref['finish'] + num * 6
-                        comment = comment[:start] + '___' + comment[
-                                                            start:finish] + '___' + comment[
+                comment = result['comment']['text']
+                for num, ref in enumerate(result['references']):
+                    start = ref['start'] + num * 7
+                    finish = ref['finish'] + num * 7
+                    comment = comment[:start] + '<i>' + comment[
+                                                            start:finish] + '</i>' + comment[
                                                                                     finish:]
-                st.markdown(comment + ' [' + result['comment']['author'] + ']')
+                paragraph, _ = comment.split('/n/n', maxsplit=1)
+                st.markdown(paragraph + ' [' + result['comment']['author'] + ']'
+                with st.expander('Посмотреть полный текст комментария'):
+                    st.markdown(comment + ' [' + result['comment']['author'] + ']', allow_unsafe_html=True)
                 with st.expander('Посмотреть текст стихотворения'):
                     st.text(result['poem']['text'])
-
         col1, col2, col3 = st.columns([2, 4, 0.5])
         with col1:
             if st.session_state['page'] > 0:
