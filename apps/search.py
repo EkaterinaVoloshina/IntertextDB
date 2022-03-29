@@ -50,7 +50,7 @@ def app():
         )
 
         poem_name = st.multiselect(
-            label='Название произведения:'
+            label='Название произведения:',
             options=sorted(db.poems.find().distinct("poem_name"))
         )
         
