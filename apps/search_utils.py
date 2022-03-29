@@ -20,7 +20,7 @@ def search_author(authors=None, year_min=None, year_max=None):
 def search_poem(poem_name=None):
     query = {}
     if poem_name is not None and len(poem_name) != 0:
-        query.update({"poem_name": {"%in": poem_name}})
+        query.update({"poem_name": {"$in": poem_name}})
     query = query if len(query) != 0 else {"poem_name": {"$exists": "true"}}
     return {"$match": query}
 
@@ -36,8 +36,8 @@ def search_lemma(lemmas=None):
 
 def search_book(book_name=None, year_min=None, year_max=None, publishing_company=None):
     query = {}
-    if book_name is not None and book_name != '':
-        query.update({"book_name": book_name})
+    if book_name is not None and len(book_name) != 0:
+        query.update({"book_name": {"$in": book_name}})
     year = {}
     if year_min is not None and year_min != '':
         year_min = int(year_min)
