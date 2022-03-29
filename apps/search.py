@@ -228,20 +228,21 @@ def app():
         else:
             for result in results:
                 st.markdown(
-                    '🖋 **' + str(result['poem']['poem_name']) + '** (' +
-                    result['book']['book_name'] + ', ' + result['book'][
-                        'publishing_company'] + ', ' + str(
-                        int(result['book']['year_published'])) + ')')
+                        '🖋 **' + str(result['poem']['poem_name']) + '** (' +
+                        result['book']['book_name'] + ', ' + result['book'][
+                            'publishing_company'] + ', ' + str(
+                            int(result['book']['year_published'])) + ')')
                 st.markdown('👤' + result['author']['name'] + ', ' + str(
-                    int(result['author']['year_born'])) + '-' + str(
-                    int(result['author']['year_dead'])))
-                comment = result['comment']['text']
-                for num, ref in enumerate(result['references']):
-                    start = ref['start'] + num * 6
-                    finish = ref['finish'] + num * 6
-                    comment = comment[:start] + '___' + comment[
-                                                        start:finish] + '___' + comment[
-                                                                                finish:]
+                        int(result['author']['year_born'])) + '-' + str(
+                        int(result['author']['year_dead'])))
+                with st.expander('Посмотреть полный текст комментария'):
+                    comment = result['comment']['text']
+                    for num, ref in enumerate(result['references']):
+                        start = ref['start'] + num * 6
+                        finish = ref['finish'] + num * 6
+                        comment = comment[:start] + '___' + comment[
+                                                            start:finish] + '___' + comment[
+                                                                                    finish:]
                 st.markdown(comment + ' [' + result['comment']['author'] + ']')
                 with st.expander('Посмотреть текст стихотворения'):
                     st.text(result['poem']['text'])
